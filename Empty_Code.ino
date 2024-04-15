@@ -1,9 +1,30 @@
-void setup() {
-  // put your setup code here, to run once:
+#include <Servo.h>
+
+Servo eggServo;
+Servo horseServo;
+const int eggPin = 2;
+const int horsePin = 3;
+
+void setup(){
+  eggServo.attach(eggPin);
+  horseServo.attach(horsePin);
+}
+
+void loop(){
+  if (digitalRead(eggPin) == HIGH) {
+    FlipEggServo(); 
+  }
+
+if (digitalRead(horsePin)==HIGH){
+  FlipHorseServo();
+}
 
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void FlipEggServo(){
+  eggServo.write(90);
+}
 
+void FlipHorseServo(){
+  horseServo.write(0);
 }
