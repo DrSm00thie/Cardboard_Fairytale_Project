@@ -1,0 +1,98 @@
+#include <Servo.h>
+
+Servo eggServo;
+Servo horseServo;
+Servo zapServo;
+Servo zipServo;
+Servo monsterServo;
+
+int zapAng = 0;
+int zipAng = 0;
+
+
+const int eggPin = 2;
+const int horsePin = 3;
+const int zapPin = 4; 
+const int zipPin = 5;
+const int monPin = 6;
+
+
+
+void setup(){
+  eggServo.attach(eggPin);
+  horseServo.attach(horsePin);
+  zapServo.attach(zapPin);
+  zipServo.attach(zipPin);
+  monsterServo.attach(monPin);
+}
+
+
+
+
+
+void loop(){
+
+  if (digitalRead(eggPin) == HIGH) { ///interaction 1
+    FlipEggServo(); //interaction 1
+  }
+
+  if (digitalRead(horsePin)==HIGH){ //interaction 2
+    FlipHorseServo(); //int 2
+  }
+
+  if (digitalRead(zapPin) == HIGH){ //int 3
+    WzapServo();
+  }
+
+  if (digitalRead(zipPin) == HIGH){ //int 3
+    WzipServo();
+  }
+
+  if (digitalRead(monPin)== HIGH){ //int 5
+    FlipMonServo();
+  }
+
+
+}
+
+
+
+
+
+       void FlipEggServo(){ //func for int 1
+  eggServo.write(90);
+}
+
+        void FlipHorseServo(){ //func for int 2
+  horseServo.write(90);
+}
+
+      void WzapServo(){ //int 3
+if (zapAng == 0) {
+  zapAng = 90;
+} else {
+  zapAng = 0;
+}
+
+zapServo.write(zapAng);
+delay(400);
+}
+
+
+       void WzipServo(){////int 3
+  if (zipAng == 0) {
+  zipAng = 90;
+} else {
+  zipAng = 0;
+}
+
+zipServo.write(zipAng);
+delay(400);
+}
+
+
+      void FlipMonServo() { /// int 5
+        for (int i = 0; i <= 90; i++ )
+        monsterServo.write(i);
+        delay(30);
+      }
