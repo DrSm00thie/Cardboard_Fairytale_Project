@@ -14,21 +14,24 @@ const int zappyPin = 5; //end interact 3
 
 Servo MonServo;
 const int monPin = 8; //end interact 5
+bool MonMoved = false;
 
 
 
 void setup(){
-  eggServo.attach(eggPin); //attaches the egg servo to 2 
+  eggServo.attach(eggPin);
+   //attaches the egg servo to 2 
   
   horseServo.attach(4); //attaches horse servo to 4 pin
   horseServo.write(0);
   pinMode(horsePin, INPUT); //horsepin is attached to 3 pin
 
   zapServo.attach(6);
-  zapServo.attach(7);
+  zipServo.attach(7);
   pinMode(zappyPin, INPUT);
 
   MonServo.attach(9);
+  MonServo.write(0);
   pinMode(monPin, INPUT); 
 
 }
@@ -49,8 +52,12 @@ void loop(){
   zipShake();
 } ///////////////////////////////////////// this ends interaction 3
 
- if (digitalRead(monPin)==HIGH){
-  FlipMonServo();
+ if (digitalRead(monPin)==HIGH && !MonMoved){
+  for (int i = 0; i <= 90; i++){
+    MonServo.write(i);
+    delay(20);
+  } 
+  MonMoved = true;
 } ///////////////////////////////////// this ends interact 5
 }
 
@@ -71,7 +78,7 @@ void zapShake(){
   }
 
   zapServo.write(zapAng);
-  delay(400);
+  delay(300);
 }
 
 void zipShake(){
@@ -82,11 +89,5 @@ void zipShake(){
   }
 
   zipServo.write(zipAng);
-  delay(400);
+  delay(300);
 } ////////////////////////// this ends function for interaction 3
-
-void FlipMonServo(){ // this ends function for interaction 5
-  for (int i = 0; i <= 90; i++)
-  MonServo.write(i);
-  delay(30);
-}
